@@ -123,7 +123,7 @@ const metodoComMetodo = {
     oi() {
         l("OI")
     },
-    xau() {
+xau() {
         l("Xau");
     }
 };
