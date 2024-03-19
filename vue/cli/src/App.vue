@@ -1,20 +1,21 @@
 <template>
   <div>
+    <usuario-component/>
     <home-component/>
 
   </div>
-
-
 </template>
 
 <script>
 
 import HomeComponent from './components/HomeComponent.vue';
+import UsuarioComponent from './components/UsuarioComponent.vue';
 
 export default {
   name: 'App',
   components: {
-    HomeComponent
+    HomeComponent,
+    UsuarioComponent
   }
 }
 </script>
