@@ -3,10 +3,6 @@
         <footer id="footer">
             <p>Bem Vindo: {{ nome }} Olá mundo do Vue com CLI</p>
             <CadastroComponent/>
-            <hr>
-            <CadastroComponent/>
-            <hr>
-            <CadastroComponent/>
         </footer>
     </div>
 </template>
@@ -18,7 +14,7 @@
         name : "HomeComponent",
         data() {
             return {
-                nome : "Fernando"
+                nome : "Ana Luísa"
             }
         },
         components: {
