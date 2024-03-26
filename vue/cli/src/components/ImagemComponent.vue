@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <img v-bind:src="urlImagem" alt="Banner">
+        <img :src="urlImagem" :alt="altImagem">
     </div>
 </template>
 
@@ -10,6 +10,7 @@
         name: "ImagemComponent",
         data() {
             return {
+                altImagem: "Banner da Imagem",
                 urlImagem : "https://blog.ipleaders.in/wp-content/uploads/2021/08/law-firm-1.jpg"
             }
         }
