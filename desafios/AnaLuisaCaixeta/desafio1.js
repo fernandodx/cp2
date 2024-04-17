@@ -1,5 +1,6 @@
-function soma(n1, n2) {
-    return n1 + n2;
+// Retorna soma entre dois números
+function solucao(parametroUm, parametroDois){
+    return parametroUm + parametroDois;
 }
 
-console.log(soma(1,2))
+console.log(solucao(10, 20));
