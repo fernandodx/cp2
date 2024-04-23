@@ -1,13 +1,26 @@
 <template>
   <div>
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/sobre">Sobre</router-link>
-    </nav>
+    <NavbarComponent/>
+    <banner-component/>
     <router-view/>
+    <footer-component/>
   </div>
 </template>
 
+<script>
+import NavbarComponent from './components/NavbarComponent.vue';
+import BannerComponent from './components/BannerComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
+
+export default{
+  name : "App" ,
+  components: {
+    BannerComponent,
+    FooterComponent,
+    NavbarComponent
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
