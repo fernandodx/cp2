@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar-component/>
+    <navbar-component :urlLogo="urlTburguer" :descImg="descTburguer"/>
     <banner-component/>
     <router-view/>
     <footer-component/>
@@ -14,6 +14,12 @@ import NavbarComponent from './components/NavbarComponent.vue'
   
 export default {
     name : "App",
+    data() {
+      return {
+        urlTburguer : "/img/logo_tburguer.png",
+        descTburguer : "Logo Tburguer"
+      }
+    },
     components: {
         BannerComponent,
         FooterComponent,
