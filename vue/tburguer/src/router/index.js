@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import MenuView from '../views/MenuView.vue'
+import PedidoComponent from '../components/PedidoComponent.vue'
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/sobre',
     name: 'sobre',
     component: AboutView
+  },
+  {
+    path: '/config-pedido',
+    name: 'config-pedido',
+    component: PedidoComponent
   }
 ]
 
