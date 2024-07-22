@@ -1,7 +1,7 @@
 <template>
     <div>
         <footer id="footer">
-            <p>Construido por Fernando Dias de Souza &copy; 2024</p>
+            <p>Construido por Felipe Alves Vila Verde Gomes &copy; 2024</p>
         </footer>
     </div>    
 </template>
