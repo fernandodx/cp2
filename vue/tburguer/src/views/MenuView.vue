@@ -33,6 +33,9 @@ export default {
             const dados = await response.json();
             this.listaMenuHamburgues = dados.burgues;
         }
+        /* Para Casa
+          - Criar um metodo para navegar para o Pedido component
+        */
     },
     mounted() {
         this.consultarMenu()
