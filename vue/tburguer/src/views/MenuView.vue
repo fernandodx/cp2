@@ -34,7 +34,9 @@ export default {
             this.listaMenuHamburgues = dados.burgues;
         }
         /* Para Casa
-          - Criar um metodo para navegar para o Pedido component
+          - Criar um metodo para navegar para o Pedido componente
+          - Nesse método vai precisar passar o burger selecionar para a o componente PedidoComponent
+          - 
         */
     },
     mounted() {
