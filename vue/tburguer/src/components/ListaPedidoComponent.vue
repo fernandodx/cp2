@@ -46,15 +46,11 @@
             </div>
             <div id="div-acoes">
                 <img src="/img/icone_lixeira.png"
-                alt="Excluir"
-                width="35px"
-                height="35px"/>
+                     alt="Excluir"
+                     width="35px"
+                     height="35px"/>
             </div>
-           
         </div>
-        
-        
-
     </div>
 </template>
 
@@ -69,9 +65,24 @@ export default {
     },
     methods: {
 
+        //ConsultarPedidos
+        async consultarPedidos() {
+            const response = await fetch("https://tburguer.wiremockapi.cloud/pedidos");
+            this.listaPedidosRealizado = await response.json();
+        },
+        //Consultar Status
+        async consultarStatus() {
+            const response = await fetch("https://tburguer.wiremockapi.cloud/status_pedido");
+            this.listaStatusPedido = await response.json();
+        }
+
+        //deletar Pedido
+
+        //Atualizar o pedido
+
     },
     mounted() {
-
+        this.consultarPedidos();
     }
 }
 
