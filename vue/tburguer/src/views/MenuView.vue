@@ -33,6 +33,11 @@ export default {
             const dados = await response.json();
             this.listaMenuHamburgues = dados.burgues;
         }
+        /* Para Casa
+          - Criar um metodo para navegar para o Pedido componente
+          - Nesse método vai precisar passar o burger selecionar para a o componente PedidoComponent
+          - 
+        */
     },
     mounted() {
         this.consultarMenu()
