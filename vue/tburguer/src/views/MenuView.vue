@@ -37,9 +37,6 @@ export default {
     mounted() {
         this.consultarMenu()
     }
-
-
-
 }
 
 </script>
