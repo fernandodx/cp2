@@ -3,9 +3,9 @@
         <form id="pedido-form">
             <div>
                 <p id="nome-hamburguer-content">
-                    Diretoria
+                   {{ burguer.nome }} 
                 </p>
-                <img id="foto-content" src="https://www.estadao.com.br/resizer/v2/L3LYN5Y4MRG6BB47MNHEEXDRGA.jpeg?quality=80&auth=c4f56563b2c83e506971bce35dbc505a5ecdf7d89a70d2f2c5fbb8b0c7071e5f&width=720&height=503&smart=true"/> 
+                <img id="foto-content" :src="burguer.foto"/> 
             </div>
             <div class="inputs" id="form-pedido">
                 <label for="nome_cliente">Nome</label>
@@ -59,13 +59,25 @@
                 listaPontoCarne : []
             }
         },
+        props(){
+            burguer: null
+        },
         methods: {
             async getTipoPontos() {
                 const response = await fetch("https://tburguer.wiremockapi.cloud/tipos_pontos");
                 const data = await response.json();
                 this.listaPontoCarne = data;
                 console.log(this.listaPontoCarne);
+            },
+            async getOpcionais (){
+                const response = await fecth:
+                cont responseJson= await response.json();
+                this.listaComplementos = responseJson.complemento;
+                this.
+
             }
+
+            
 
             //TODO criar um metodo para preencher o complemento e a bebida.
             //EndPoints: /opcionais 

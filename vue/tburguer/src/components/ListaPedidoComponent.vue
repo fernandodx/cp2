@@ -83,6 +83,7 @@ export default {
     },
     mounted() {
         this.consultarPedidos();
+        this.consultarStatus();
     }
 }
 
