@@ -35,7 +35,7 @@
                 </ul>
             </div>
             <div>
-                <select name="status" class="status">
+                <select name="status" class="status" @change="atualizarStatusPedido($event, pedido.id)">
                     <option value="">Selecione</option>
                     <option v-for="status in listaStatusPedido" :key="status.id"
                             :value="status.id"
@@ -48,7 +48,8 @@
                 <img src="/img/icone_lixeira.png"
                      alt="Excluir"
                      width="35px"
-                     height="35px"/>
+                     height="35px"
+                     @click="deletarPedido(pedido.id)"/>
             </div>
         </div>
     </div>
@@ -67,16 +68,34 @@ export default {
 
         //ConsultarPedidos
         async consultarPedidos() {
-            const response = await fetch("https://tburguer.wiremockapi.cloud/pedidos");
+            const response = await fetch("http://localhost:3000/pedidos");
             this.listaPedidosRealizado = await response.json();
         },
         //Consultar Status
         async consultarStatus() {
-            const response = await fetch("https://tburguer.wiremockapi.cloud/status_pedido");
+            const response = await fetch("http://localhost:3000/status_pedido");
             this.listaStatusPedido = await response.json();
+        },
+        async deletarPedido(id) {
+            const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
+                method: "DELETE"
+            });
+        },
+        async atualizarStatusPedido(event, id) {
+            const idPedidoAtualizado = event.target.value;
+            console.log(idPedidoAtualizado);
+
+            const atualizacaoJson = JSON.stringify({statusId : idPedidoAtualizado});
+
+            const response = await fetch(`http://localhost:3000/pedidos/${id}`,{
+                method : "PATCH",
+                headers: {"Content-Type" : "application/json"},
+                body: atualizacaoJson
+            });
+
+
         }
 
-        //deletar Pedido
 
         //Atualizar o pedido
 

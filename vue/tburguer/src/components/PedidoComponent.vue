@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form id="pedido-form">
+        <form id="pedido-form" @submit="criarPedido($event)">
             <div>
                 <p id="nome-hamburguer-content">
                     {{ burguer && burguer.nome ? burguer.nome : "-" }}
@@ -12,6 +12,7 @@
                 <input type="text"
                        id="nome-cliente"
                        name="nome-cliente"
+                       v-model="nomeCliente"
                        placeholder="Digite seu Nome"/>
             </div>
             <div class="inputs">
@@ -41,11 +42,10 @@
                 </div>
                 
                 <label for="Complemento">Adicione uma Bebida</label>
-                <div class="checkbox-container">
-                    <input type="checkbox" name="coca" value="Coca"/>
-                    <span>Coca-Cola</span>
-                    <input type="checkbox" name="fanta" value="Fanta">
-                    <span>Fanta</span>
+
+                <div class="checkbox-container" v-for="bebida in listaBebidas" :key="bebida.id">
+                    <input type="checkbox" :name="bebida.nome" :value="bebida" v-model="listaBebidasSelecionadas"/>
+                    <span>*{{ bebida.nome }}*</span>
                 </div>
             </div>
             <div class="inputs">
@@ -60,11 +60,13 @@
         name: "PedidoComponent",
         data() {
             return {
+                nomeCliente : "",
                 pontoCarneSelecionado: "",
                 listaPontoCarne : [],
                 listaComplementos : [],
                 listaBebidas: [],
-                listaComplementosSelecionados: []
+                listaComplementosSelecionados: [],
+                listaBebidasSelecionadas: []
             }
         },
         props: {
@@ -72,25 +74,47 @@
         },
         methods: {
             async getTipoPontos() {
-                const response = await fetch("https://tburguer.wiremockapi.cloud/tipos_pontos");
+                const response = await fetch(" http://localhost:3000/tipos_pontos");
                 const data = await response.json();
                 this.listaPontoCarne = data;
             },
             async getOpcionais() {
-                const response = await fetch("https://tburguer.wiremockapi.cloud/opcionais");
+                const response = await fetch(" http://localhost:3000/opcionais");
                 const responseJson = await response.json();
                 this.listaComplementos = responseJson.complemento;
                 this.listaBebidas = responseJson.bebidas;
+            },
+            async criarPedido(e) {
+                e.preventDefault();
+
+                const dadosPedido = {
+                    nome : this.nomeCliente,
+                    ponto: this.pontoCarneSelecionado,
+                    bebidas: Array.from(this.listaBebidasSelecionadas),
+                    complementos: Array.from(this.listaComplementosSelecionados),
+                    statusId: 5,
+                    hamburguer: this.burguer 
+                }
+
+                const dadosPedidoJson = JSON.stringify(dadosPedido);
+
+                const requisicao = await fetch("http://localhost:3000/pedidos", {
+                    method: "POST",
+                    headers: {"Content-Type" : "application/json"},
+                    body : dadosPedidoJson
+                });
+
+
+
+
             }
-            //TODO criar um metodo para preencher o complemento e a bebida.
-            //EndPoints: /opcionais 
+        
 
 
         },
         mounted() {
            this.getTipoPontos(); 
            this.getOpcionais();
-            //TODO Vou precisar pegar o Argumento Hamburguer e preencher os campos obrigatórios. 
 
         }
     }
@@ -136,6 +160,7 @@ label {
     color: #222;
     padding: 5px 12px;
     border-left: 4px solid darkgoldenrod;
+    display: flex;
 }
 
 input, select {
@@ -151,6 +176,7 @@ input, select {
 select {
     height: 50px;
 }
+
 
 #opcionais-titulo {
     width: 100%;
