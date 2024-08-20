@@ -3,9 +3,15 @@
         <form id="pedido-form">
             <div>
                 <p id="nome-hamburguer-content">
+<<<<<<< HEAD
                    {{ burguer.nome }} 
                 </p>
                 <img id="foto-content" :src="burguer.foto"/> 
+=======
+                    {{ burguer && burguer.nome ? burguer.nome : "-" }}
+                </p>
+                <img id="foto-content" :src="burguer && burguer.foto ? burguer.foto : ''"/> 
+>>>>>>> 22b26c5538c0892168cfc28fbb9e93e468320f41
             </div>
             <div class="inputs" id="form-pedido">
                 <label for="nome_cliente">Nome</label>
@@ -29,12 +35,17 @@
             <div id="opcionais-titulo" class="inputs">
                 <label id="opcionais-titulo" for="Opcionais"> Selecione os opcionais</label>
                 <label id="opcionais-subtitulo" for="Complemento">Adicione um complemento</label>
-                <div class="checkbox-container">
-                    <input type="checkbox" name="batata" value="Batata"/>
-                    <span>Batata</span>
-                    <input type="checkbox" name="refri" value="Refri">
-                    <span>Refri</span>
+                
+                <div class="checkbox-container"
+                     v-for="complemento in listaComplementos"
+                     :key="complemento.id">
+
+                     <input type="checkbox" :name="complemento.nome"
+                            v-model="listaComplementosSelecionados"
+                            :value="complemento">
+                     <span>{{ complemento.nome }}</span>       
                 </div>
+                
                 <label for="Complemento">Adicione uma Bebida</label>
                 <div class="checkbox-container">
                     <input type="checkbox" name="coca" value="Coca"/>
@@ -56,10 +67,17 @@
         data() {
             return {
                 pontoCarneSelecionado: "",
-                listaPontoCarne : []
+                listaPontoCarne : [],
+                listaComplementos : [],
+                listaBebidas: [],
+                listaComplementosSelecionados: []
             }
         },
+<<<<<<< HEAD
         props(){
+=======
+        props: {
+>>>>>>> 22b26c5538c0892168cfc28fbb9e93e468320f41
             burguer: null
         },
         methods: {
@@ -67,6 +85,7 @@
                 const response = await fetch("https://tburguer.wiremockapi.cloud/tipos_pontos");
                 const data = await response.json();
                 this.listaPontoCarne = data;
+<<<<<<< HEAD
                 console.log(this.listaPontoCarne);
             },
             async getOpcionais (){
@@ -79,6 +98,15 @@
 
             
 
+=======
+            },
+            async getOpcionais() {
+                const response = await fetch("https://tburguer.wiremockapi.cloud/opcionais");
+                const responseJson = await response.json();
+                this.listaComplementos = responseJson.complemento;
+                this.listaBebidas = responseJson.bebidas;
+            }
+>>>>>>> 22b26c5538c0892168cfc28fbb9e93e468320f41
             //TODO criar um metodo para preencher o complemento e a bebida.
             //EndPoints: /opcionais 
 
@@ -86,6 +114,7 @@
         },
         mounted() {
            this.getTipoPontos(); 
+           this.getOpcionais();
             //TODO Vou precisar pegar o Argumento Hamburguer e preencher os campos obrigatórios. 
 
         }

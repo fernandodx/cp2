@@ -91,4 +91,60 @@ export default {
 
 <style scoped>
 
+#pedidos-tabela {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#pedidos-tabela-cabecalho, 
+#pedidos-tabela-linhas, 
+.pedidos-tabela-linha {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#pedidos-tabela-cabecalho {
+    font-weight: bold;
+    padding: 12px;
+    border-bottom: 2px solid #222;
+}
+
+#pedidos-tabela-cabecalho div,
+.pedidos-tabela-linha div {
+    width: 18%;
+}
+
+.pedidos-tabela-linha {
+    width: 100%;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+#pedidos-tabela-cabecalho #ordem-id,
+.pedidos-tabela-linha #ordem-numero,
+.pedidos-tabela-linha #div-acoes,
+#pedidos-tabela-cabecalho #div-acoes {
+    width: 5%;
+}
+
+select {
+    padding: 2px;
+    width: 110px;
+    border: #222 solid 1 px;
+    height: 36px;
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+.pedidos-tabela-linha .divisor {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+    height: 2px;
+    background-color: darkgoldenrod;
+}
+
+
+
+
 </style>
