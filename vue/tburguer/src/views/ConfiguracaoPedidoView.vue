@@ -2,6 +2,7 @@
     <div>
         <h1>Configurar Pedido</h1>
         <pedido-component :burguer="this.hamburguerSelecionado"/>
+       
     </div>
 </template>
 

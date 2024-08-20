@@ -77,6 +77,10 @@ export default {
             this.listaStatusPedido = await response.json();
         },
         async deletarPedido(id) {
+            
+            //3˚ - Ao deletar o pedido, deve ser exibido a mensagem do componente de sucesso. 
+                // Após isso a lista deve ser atualizada.
+
             const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
                 method: "DELETE"
             });

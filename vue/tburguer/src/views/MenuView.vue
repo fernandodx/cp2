@@ -38,11 +38,6 @@ export default {
             const burguerJsonEncode = encodeURIComponent(param);
             this.$router.push({path: '/config-pedido', query: {burguer : burguerJsonEncode}});
         }
-        /* Para Casa
-          - Criar um metodo para navegar para o Pedido componente
-          - Nesse método vai precisar passar o burger selecionar para a o componente PedidoComponent
-          - 
-        */
     },
     mounted() {
         this.consultarMenu()
