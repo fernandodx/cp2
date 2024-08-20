@@ -3,9 +3,9 @@
         <form id="pedido-form">
             <div>
                 <p id="nome-hamburguer-content">
-                    Diretoria
+                    {{ burguer && burguer.nome ? burguer.nome : "-" }}
                 </p>
-                <img id="foto-content" src="https://www.estadao.com.br/resizer/v2/L3LYN5Y4MRG6BB47MNHEEXDRGA.jpeg?quality=80&auth=c4f56563b2c83e506971bce35dbc505a5ecdf7d89a70d2f2c5fbb8b0c7071e5f&width=720&height=503&smart=true"/> 
+                <img id="foto-content" :src="burguer && burguer.foto ? burguer.foto : ''"/> 
             </div>
             <div class="inputs" id="form-pedido">
                 <label for="nome_cliente">Nome</label>
@@ -29,12 +29,17 @@
             <div id="opcionais-titulo" class="inputs">
                 <label id="opcionais-titulo" for="Opcionais"> Selecione os opcionais</label>
                 <label id="opcionais-subtitulo" for="Complemento">Adicione um complemento</label>
-                <div class="checkbox-container">
-                    <input type="checkbox" name="batata" value="Batata"/>
-                    <span>Batata</span>
-                    <input type="checkbox" name="refri" value="Refri">
-                    <span>Refri</span>
+                
+                <div class="checkbox-container"
+                     v-for="complemento in listaComplementos"
+                     :key="complemento.id">
+
+                     <input type="checkbox" :name="complemento.nome"
+                            v-model="listaComplementosSelecionados"
+                            :value="complemento">
+                     <span>{{ complemento.nome }}</span>       
                 </div>
+                
                 <label for="Complemento">Adicione uma Bebida</label>
                 <div class="checkbox-container">
                     <input type="checkbox" name="coca" value="Coca"/>
@@ -56,17 +61,27 @@
         data() {
             return {
                 pontoCarneSelecionado: "",
-                listaPontoCarne : []
+                listaPontoCarne : [],
+                listaComplementos : [],
+                listaBebidas: [],
+                listaComplementosSelecionados: []
             }
+        },
+        props: {
+            burguer: null
         },
         methods: {
             async getTipoPontos() {
                 const response = await fetch("https://tburguer.wiremockapi.cloud/tipos_pontos");
                 const data = await response.json();
                 this.listaPontoCarne = data;
-                console.log(this.listaPontoCarne);
+            },
+            async getOpcionais() {
+                const response = await fetch("https://tburguer.wiremockapi.cloud/opcionais");
+                const responseJson = await response.json();
+                this.listaComplementos = responseJson.complemento;
+                this.listaBebidas = responseJson.bebidas;
             }
-
             //TODO criar um metodo para preencher o complemento e a bebida.
             //EndPoints: /opcionais 
 
@@ -74,6 +89,7 @@
         },
         mounted() {
            this.getTipoPontos(); 
+           this.getOpcionais();
             //TODO Vou precisar pegar o Argumento Hamburguer e preencher os campos obrigatórios. 
 
         }
