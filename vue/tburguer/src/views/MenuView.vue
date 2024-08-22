@@ -10,7 +10,7 @@
                             <p id="nome-content">{{burguer.nome}}</p>
                             <p id="preco-content">R$ {{burguer.valor}},00</p>
                             <p id="descricao-content">{{ burguer.descricao }}</p>
-                            <button>Selecionar</button>
+                            <button @click="selecionarBurguer(burguer)">Selecionar</button>
                         </div>
                     </div>
                 </div>
@@ -29,15 +29,15 @@ export default {
     },
     methods: {
         async consultarMenu() {
-            const response = await fetch("https://tburguer.wiremockapi.cloud/menu");
+            const response = await fetch(" http://localhost:3000/menu");
             const dados = await response.json();
             this.listaMenuHamburgues = dados.burgues;
+        },
+        selecionarBurguer(burguerSelecionado) {
+            const param = JSON.stringify(burguerSelecionado);
+            const burguerJsonEncode = encodeURIComponent(param);
+            this.$router.push({path: '/config-pedido', query: {burguer : burguerJsonEncode}});
         }
-        /* Para Casa
-          - Criar um metodo para navegar para o Pedido componente
-          - Nesse método vai precisar passar o burger selecionar para a o componente PedidoComponent
-          - 
-        */
     },
     mounted() {
         this.consultarMenu()
