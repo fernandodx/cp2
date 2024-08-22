@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 03</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+    body{
+        font-family: 'Nunito', Helvetica, sans-serif;
+        background-color: #dfdfdf;
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    header{
+        width: 600px;
+        margin: 50px auto 0 auto;
+        background-color: #3F51B5;
+        color: white;
+        padding: 25px;
+        text-align: center;
+    }
+
+    main{
+        width: 600px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 10px 25px;
+        color: #212121;
+    }
+
+    input{
+        width: 200px;
+        height: 22px;
+        margin-left: 10px;
+    }
+    button{
+        width: 110px;
+        height: 60px;
+        font-size: .9rem;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        color: white;
+        background-color: #4CAF50;
+        border-radius: 12px;
+        border: none;
+    }  
+    #res{
+        margin-top: 25px;
+    }
+
+    footer{
+        text-align: center;
+        margin: auto;
+        font-size: .9em;
+        border: .5px solid black;
+        width: 600px;
+        padding: 0 25px;
+        background-color: #BDBDBD;
+    }
+    footer > p{
+        margin: 0;
+    }
+</style>
+<body>
+    <header>
+        <h1>Construção de Páginas 2</h1>
+    </header>
+    <main>
+        <h2>Desafio 03:</h2>
+        <p>Verificar se o texto de entrada do usuário é um Palíndromo.</p>
+        <h2>Resolução:</h2>
+        <p>Entre com um texto:
+        <input type="text" name="texto" id="texto" placeholder="                Texto aqui"></p>
+        <button id="bt1" onclick="checar()">Checar<br>Palíndromo</button>
+        <div id="res">
+            <p>O resultado aparece aqui.</p>
+        </div>
+        
+    </main>
+    <footer><p>&copy; Desenvolvido por André Carvalho</p></footer>
+    <script>
+        var entrada = document.querySelector('#texto')
+        var botão = document.querySelector('#bt1')
+        var resultado = document.querySelector('#res')
+        function checar(){
+            var texto = entrada.value.toLowerCase()
+            var letras = texto.split("")
+            var letrasRev = letras.reverse()
+            var textoRev = letrasRev.join("")
+            if (texto == textoRev){
+                resultado.innerHTML = (`<p>O texto: ${texto},<strong> É um palíndromo.</strong></p>`)
+            }else{
+                resultado.innerHTML = (`<p>O texto: ${texto},<strong> NÃO é um palíndromo.<strong></p>`)
+            }
+        }
+
+    </script>
+</body>
+</html>

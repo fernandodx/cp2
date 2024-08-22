@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio 01</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+        body{
+            background-color: rgb(188, 185, 185);
+            font-family: 'Roboto', Helvetica, sans-serif;
+            font-size: 1.2rem;
+        }
+
+        main{
+            width: 600px;
+            margin: 50px auto 0 auto;
+            background-color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+        }
+
+        input{
+            width: 90px;
+            height: 25px;
+        }
+        button{
+            background-color: rgb(84, 151, 18);
+            height: 25px;
+            margin-left: 10px;
+            width: 80px;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+        }
+        hr{
+            margin-top: 20px;
+        }
+
+        footer{
+            text-align: center;
+            margin: 10px 0;
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        footer > p{
+            margin: 0;
+        } 
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Construção de Páginas 2</h1>
+        <h2>Desafio 01:</h2>
+        <p>Escreva uma função que retorne a soma entre dois números.</p>
+        <h2>Resolução:</h2>
+        <input type="number" name="par1" id="p1" placeholder="parcela 1"> +
+        <input type="number" name="par2" id="p2" placeholder="parcela 2">
+        <button id="bt1" onclick="somar()">Somar</button>
+        <div id="res">
+            <p>O resultado aparece aqui!</p>
+        </div>
+    </main>
+    <footer><p>&copy; Desenvolvido por André Carvalho</p></footer>
+
+    <script>
+        var entrada1 = document.querySelector('#p1')
+        var entrada2 = document.querySelector('#p2')
+        var resultado = document.querySelector('#res')
+        function somar(){
+            var parcela1 = Number.parseFloat(entrada1.value)
+            var parcela2 = Number.parseFloat(entrada2.value)
+            var soma = parcela1 + parcela2
+            resultado.innerHTML = `<hr><p>A soma de ${parcela1.toLocaleString('pt-br')} com ${parcela2.toLocaleString('pt-br')} resulta em: ${soma.toLocaleString('pt-br')}</p>`
+        }
+    </script>
+</body>
+</html>

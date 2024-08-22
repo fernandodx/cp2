@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio 4</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Construção de Páginas 2</h1>
+    </header>
+    <main>
+        <div id="enunciado">
+            <h2>Desafio 04:</h2>
+            <p>Dado um array de inteiros, encontre o par de elementos adjacentes que possui o maior produto e retorne esse produto.</p>
+            <p>Por Exemplo:</p>
+            <p>InputArray = [3, 6, -2, -5, 7, 3], o resultado seria = 21, porque 7 * 3 produz o maior número produto.</p>
+        </div>
+        <h2>Resolução:</h2>
+        <div id="divEnt">
+            <h3>Entrada:</h3>
+            <p>Entre com os elementos do vetor separados por espaço: <input type="text" name="ent" id="ent"></p>
+            <p><button id="btElem" onclick="adicionar()">Adicionar</button> <button id="btLimpar" onclick="limpar()">Limpar memória</button></p>
+            <div id="vetEntrada">
+                <p>O vetor de entrada aparece aqui.</p>
+            </div>
+            <p><button id="btCalc" onclick="calcular()">Calcular</button></p>
+        </div>
+        <h3>Saída:</h3>
+        <div id="divSaida">
+        </div>
+    </main>
+    <footer><p>&copy; Desenvolvido por André Carvalho</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

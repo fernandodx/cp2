@@ -1,0 +1,49 @@
+# DESAFIO 01 
+
+ • Escreva uma função que retorne a soma entre dois números.
+
+ Exemplo: 
+
+ parametro1 = 1
+
+ parametro2 = 2
+
+ solucao(parametro1, parametro2) = 3
+
+
+
+# DESAFIO 02 
+
+Dado um ano, retorne o século em que ele se encontra. 
+O primeiro século abrange do ano 1 até o ano 100 inclusive, o segundo - do ano 101 até o ano 200 inclusive, etc.
+exemplo: Ano = 1905 Século = 20
+Ano: 1700 Século = 17
+Criar uma função que receba um ano e retorne o século daquele ano.
+
+#DESAFIO 03
+Verifique se a string é um Palíndromo
+ 
+Palíndromo
+é uma palavra, frase ou número que permanece igual quando lida de trás para frente e frente para trás.
+Por exemplo: 
+CIVIC
+OVO
+ARARA 
+Ou seja para todos ai acima a função deve retornar true. Exemplo: 
+function checkPalindromo("civic") : Resultado = true
+function checkPalindromo("abac") : Resultado = false
+
+
+
+#DESAFIO 04
+Dado um array de inteiros, encontre o par de elementos adjacentes que possui o maior produto e retorne esse produto.
+Por Exemplo: 
+inputArray = [3, 6, -2, -5, 7, 3], o resultado seria = 21, porque 7 * 3 produz o maior número produto.
+
+
+
+
+#DESAFIO 05
+Dado um array de strings, retorne outro array contendo todas as suas strings mais longas.
+Por Exemplo:
+inputArray = ["aba", "aa", "ad", "vcd", "aba"]-> o Resultado deverá ser = ["aba", "vcd", "aba"].

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio 02</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+        body{
+            font-family: 'Open Sans', Helvetica, sans-serif;
+            font-size: 1.1em;
+            background-color: rgb(178, 231, 184);
+            margin: auto;
+        }
+
+        main{
+            background-color: white;
+            width: 700px;
+            margin: 50px auto 0px auto;
+            padding: 10px 30px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        p{
+            text-align: justify;
+        }
+
+        input{
+            width: 60px;
+        }
+
+        footer{
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        footer > p{
+            margin: 0;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Construção de Páginas 2</h1>
+        <h2>Desafio 02:</h2>
+        <p>Dado um ano, retorne o século em que ele se encontra. O primeiro século abrange do ano 1 até o ano 100 inclusive, o segundo - do ano 101 até o ano 200 inclusive, etc. Criar uma função que receba um ano e retorne o século daquele ano.</p>
+        <p>Exemplos:<br> Ano = 1905 Século = 20 <br>Ano: 1700 Século = 17</p>
+        <h2>Resolução:</h2>
+        <p>Digite o ano: <input type="number" name="sec" id="sec">
+        <button id="bt1">Calcular</button></p>
+        <div id="res">
+            <p>O Resultado aparece aqui.</p>
+        </div>
+    </main>
+    <footer><p>&copy; Desenvolvido por André Carvalho</p></footer>
+    <script>
+        var entrada = document.getElementById('sec')
+        var botão = document.getElementById('bt1')
+        var resultado = document.getElementById('res')
+        botão.addEventListener('click', calcular)
+        function calcular(){
+            var ano = Number.parseInt(entrada.value)
+            controle = ano % 100
+            if (controle == 0){
+                var seculo = (ano - controle) / 100
+            } else{
+                var seculo = 1 + ((ano - controle) / 100)
+            }
+            resultado .innerHTML = `O ano ${ano} pertence ao século: <strong>${seculo}</strong>`
+        }
+    </script>
+</body>
+</html>
