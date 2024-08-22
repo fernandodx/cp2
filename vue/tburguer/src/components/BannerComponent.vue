@@ -5,12 +5,11 @@
 </template>
 
 <script>
-    export default {
-        name: "BannerComponent"
-    }
+export default {
+  name: 'BannerComponent'
+};
 
 </script>
-
 
 <style scoped>
 
@@ -32,7 +31,5 @@
     padding: 25px;
     border-radius: 100px 0px 0px 100px;
   }
-
-
 
 </style>

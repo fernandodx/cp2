@@ -8,24 +8,24 @@
 </template>
 
 <script>
-import BannerComponent from './components/BannerComponent.vue'
-import FooterComponent from './components/FooterComponent.vue'
-import NavbarComponent from './components/NavbarComponent.vue'
-  
+import BannerComponent from './components/BannerComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
+import NavbarComponent from './components/NavbarComponent.vue';
+
 export default {
-    name : "App",
-    data() {
-      return {
-        urlTburguer : "/img/logo_tburguer.png",
-        descTburguer : "Logo Tburguer"
-      }
-    },
-    components: {
-        BannerComponent,
-        FooterComponent,
-        NavbarComponent
-    }
+  name: 'App',
+  data () {
+    return {
+      urlTburguer: '/img/logo_tburguer.png',
+      descTburguer: 'Logo Tburguer'
+    };
+  },
+  components: {
+    BannerComponent,
+    FooterComponent,
+    NavbarComponent
   }
+};
 
 </script>
 
