@@ -2,9 +2,9 @@ name: Lint and Test
 
 on:
   push:
-    branches: [main]
+    branches: [tburguer]
   pull_request:
-    branches: [main]
+    branches: [tburguer]
 
 jobs:
   lint:
