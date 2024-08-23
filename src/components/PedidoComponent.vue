@@ -104,7 +104,7 @@ export default {
 
       const dadosPedidoJson = JSON.stringify(dadosPedido);
 
-      const requisicao = await fetch('http://localhost:3000/pedidos', {
+      await fetch('http://localhost:3000/pedidos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: dadosPedidoJson,

@@ -80,7 +80,7 @@ export default {
       // 3˚ - Ao deletar o pedido, deve ser exibido a mensagem do componente de sucesso.
       // Após isso a lista deve ser atualizada.
 
-      const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
+      await fetch(`http://localhost:3000/pedidos/${id}`, {
         method: 'DELETE',
       });
     },
@@ -90,7 +90,7 @@ export default {
 
       const atualizacaoJson = JSON.stringify({ statusId: idPedidoAtualizado });
 
-      const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
+      await fetch(`http://localhost:3000/pedidos/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: atualizacaoJson,
