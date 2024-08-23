@@ -1,2 +1,29 @@
-# cp2
-Construção de Páginas 2
+# tburguer
+
+## Project setup
+
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+
+```
+npm run build
+```
+
+### Para subir o banco de dados
+
+```
+npm run bancojson
+```
+
+### Customize configuration
+
+See [Configuration Reference](https://cli.vuejs.org/config/).
