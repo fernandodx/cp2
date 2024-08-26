@@ -6,13 +6,13 @@
 </template>
 
 <script>
-    import ListaPedidoComponent from '../components/ListaPedidoComponent.vue'
+import ListaPedidoComponent from '../components/ListaPedidoComponent.vue';
 
-    export default{
-        name: "PedidosView",
-        components: {
-            ListaPedidoComponent
-        }
-    }
+export default {
+  name: 'PedidosView',
+  components: {
+    ListaPedidoComponent
+  }
+};
 
 </script>

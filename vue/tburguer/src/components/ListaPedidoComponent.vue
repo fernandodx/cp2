@@ -4,17 +4,17 @@
         <div>
             <div id="pedidos-tabela-cabecalho">
                 <div id="ordem-id">#ID</div>
-                <div>Nome</div>    
-                <div>Hamburguer</div>    
-                <div>Ponto</div>    
-                <div>Opcionais</div>    
-                <div>Status</div>    
-                <div id="div-acoes">Ações</div>    
+                <div>Nome</div>
+                <div>Hamburguer</div>
+                <div>Ponto</div>
+                <div>Opcionais</div>
+                <div>Status</div>
+                <div id="div-acoes">Ações</div>
             </div>
-        </div>  
+        </div>
 
         <!-- Quando não tiver nenhum pedido. Somente o componente de mensagem é para ser apresentado. A tabela deve ser escondida. -->
-        
+
         <div class="pedidos-tabela-linha"
             v-for="pedido in listaPedidosRealizado" :key="pedido.id">
             <div id="ordem-numero">{{ pedido.id }}</div>
@@ -35,7 +35,7 @@
                 </ul>
             </div>
             <div>
-                <select name="status" class="status">
+                <select name="status" class="status" @change="atualizarStatusPedido($event, pedido.id)">
                     <option value="">Selecione</option>
                     <option v-for="status in listaStatusPedido" :key="status.id"
                             :value="status.id"
@@ -48,7 +48,8 @@
                 <img src="/img/icone_lixeira.png"
                      alt="Excluir"
                      width="35px"
-                     height="35px"/>
+                     height="35px"
+                     @click="deletarPedido(pedido.id)"/>
             </div>
         </div>
     </div>
@@ -56,36 +57,54 @@
 
 <script>
 export default {
-    name: "ListaPedidoComponent",
-    data() {
-        return {
-            listaPedidosRealizado: [],
-            listaStatusPedido: []
-        }
+  name: 'ListaPedidoComponent',
+  data () {
+    return {
+      listaPedidosRealizado: [],
+      listaStatusPedido: []
+    };
+  },
+  methods: {
+
+    // ConsultarPedidos
+    async consultarPedidos () {
+      const response = await fetch('http://localhost:3000/pedidos');
+      this.listaPedidosRealizado = await response.json();
     },
-    methods: {
-
-        //ConsultarPedidos
-        async consultarPedidos() {
-            const response = await fetch("https://tburguer.wiremockapi.cloud/pedidos");
-            this.listaPedidosRealizado = await response.json();
-        },
-        //Consultar Status
-        async consultarStatus() {
-            const response = await fetch("https://tburguer.wiremockapi.cloud/status_pedido");
-            this.listaStatusPedido = await response.json();
-        }
-
-        //deletar Pedido
-
-        //Atualizar o pedido
-
+    // Consultar Status
+    async consultarStatus () {
+      const response = await fetch('http://localhost:3000/status_pedido');
+      this.listaStatusPedido = await response.json();
     },
-    mounted() {
-        this.consultarPedidos();
-        this.consultarStatus();
+    async deletarPedido (id) {
+      // 3˚ - Ao deletar o pedido, deve ser exibido a mensagem do componente de sucesso.
+      // Após isso a lista deve ser atualizada.
+
+      const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
+        method: 'DELETE'
+      });
+    },
+    async atualizarStatusPedido (event, id) {
+      const idPedidoAtualizado = event.target.value;
+      console.log(idPedidoAtualizado);
+
+      const atualizacaoJson = JSON.stringify({ statusId: idPedidoAtualizado });
+
+      const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: atualizacaoJson
+      });
     }
-}
+
+    // Atualizar o pedido
+
+  },
+  mounted () {
+    this.consultarPedidos();
+    this.consultarStatus();
+  }
+};
 
 </script>
 
@@ -96,8 +115,8 @@ export default {
     margin: 0 auto;
 }
 
-#pedidos-tabela-cabecalho, 
-#pedidos-tabela-linhas, 
+#pedidos-tabela-cabecalho,
+#pedidos-tabela-linhas,
 .pedidos-tabela-linha {
     display: flex;
     flex-wrap: wrap;
@@ -143,8 +162,5 @@ select {
     height: 2px;
     background-color: darkgoldenrod;
 }
-
-
-
 
 </style>

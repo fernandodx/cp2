@@ -5,20 +5,19 @@
                 <img :src="urlLogo" :alt="descImg" id="logo"/>
             </router-link>
             <router-link to="/menu">Menu</router-link>
-            <router-link to="/config-pedido">Config</router-link>
             <router-link to="/pedidos">Pedidos</router-link>
         </nav>
-    </div>    
+    </div>
 </template>
 
 <script>
-    export default {
-        name : "NavbarComponent",
-        props: {
-            urlLogo : String,
-            descImg : String
-        }
-    }
+export default {
+  name: 'NavbarComponent',
+  props: {
+    urlLogo: String,
+    descImg: String
+  }
+};
 
 </script>
 
@@ -54,5 +53,5 @@
     color: antiquewhite;
     font-size: 20px;
  }
- 
+
 </style>

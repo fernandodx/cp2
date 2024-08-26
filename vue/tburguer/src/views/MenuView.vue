@@ -21,36 +21,29 @@
 
 <script>
 export default {
-    name : "MenuView",
-    data() {
-        return {
-            listaMenuHamburgues: []
-        };
+  name: 'MenuView',
+  data () {
+    return {
+      listaMenuHamburgues: []
+    };
+  },
+  methods: {
+    async consultarMenu () {
+      const response = await fetch(' http://localhost:3000/menu');
+      const dados = await response.json();
+      this.listaMenuHamburgues = dados.burgues;
     },
-    methods: {
-        async consultarMenu() {
-            const response = await fetch("https://tburguer.wiremockapi.cloud/menu");
-            const dados = await response.json();
-            this.listaMenuHamburgues = dados.burgues;
-        },
-        selecionarBurguer(burguerSelecionado) {
-            const param = JSON.stringify(burguerSelecionado);
-            const burguerJsonEncode = encodeURIComponent(param);
-            this.$router.push({path: '/config-pedido', query: {burguer : burguerJsonEncode}});
-        }
-        /* Para Casa
-          - Criar um metodo para navegar para o Pedido componente
-          - Nesse método vai precisar passar o burger selecionar para a o componente PedidoComponent
-          - 
-        */
-    },
-    mounted() {
-        this.consultarMenu()
+    selecionarBurguer (burguerSelecionado) {
+      const param = JSON.stringify(burguerSelecionado);
+      const burguerJsonEncode = encodeURIComponent(param);
+      this.$router.push({ path: '/config-pedido', query: { burguer: burguerJsonEncode } });
     }
+  },
+  mounted () {
+    this.consultarMenu();
+  }
 
-
-
-}
+};
 
 </script>
 
@@ -152,9 +145,5 @@ export default {
     border: solid 1px rgb(6, 87, 85);
     border-radius: 5px;
 };
-
-
-
-
 
 </style>
