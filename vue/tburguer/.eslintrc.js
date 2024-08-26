@@ -11,7 +11,7 @@ module.exports = {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
     semi: ["error", "always"],
-    indent: ["warning", 2],
+    indent: ["warn", 2], // Corrigido para usar 'warn' ao invés de 'warning'
     quotes: ["error", "single"],
     "no-unused-vars": "error",
   },
