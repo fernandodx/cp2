@@ -5,7 +5,7 @@
                 <p id="nome-hamburguer-content">
                     {{ burguer && burguer.nome ? burguer.nome : "-" }}
                 </p>
-                <img id="foto-content" :src="burguer && burguer.foto ? burguer.foto : ''"/>
+                <img id="foto-content" :src="burguer && burguer.foto ? burguer.foto : ''"/> 
             </div>
             <div class="inputs" id="form-pedido">
                 <label for="nome_cliente">Nome</label>
@@ -22,15 +22,15 @@
                     name="ponto-carne"
                     v-model="pontoCarneSelecionado">
                     <option value="" selected>Selecione o ponto</option>
-                    <option v-for="pontoCarne in listaPontoCarne"
-                    :key="pontoCarne.id"
+                    <option v-for="pontoCarne in listaPontoCarne" 
+                    :key="pontoCarne.id" 
                     :value="pontoCarne">{{ pontoCarne.descricao }}</option>
                 </select>
             </div>
             <div id="opcionais-titulo" class="inputs">
                 <label id="opcionais-titulo" for="Opcionais"> Selecione os opcionais</label>
                 <label id="opcionais-subtitulo" for="Complemento">Adicione um complemento</label>
-
+                
                 <div class="checkbox-container"
                      v-for="complemento in listaComplementos"
                      :key="complemento.id">
@@ -38,9 +38,9 @@
                      <input type="checkbox" :name="complemento.nome"
                             v-model="listaComplementosSelecionados"
                             :value="complemento">
-                     <span>{{ complemento.nome }}</span>
+                     <span>{{ complemento.nome }}</span>       
                 </div>
-
+                
                 <label for="Complemento">Adicione uma Bebida</label>
 
                 <div class="checkbox-container" v-for="bebida in listaBebidas" :key="bebida.id">
@@ -56,67 +56,74 @@
 </template>
 
 <script>
-export default {
-  name: 'PedidoComponent',
-  data () {
-    return {
-      nomeCliente: '',
-      pontoCarneSelecionado: '',
-      listaPontoCarne: [],
-      listaComplementos: [],
-      listaBebidas: [],
-      listaComplementosSelecionados: [],
-      listaBebidasSelecionadas: []
-    };
-  },
-  props: {
-    burguer: null
-  },
-  methods: {
-    async getTipoPontos () {
-      const response = await fetch(' http://localhost:3000/tipos_pontos');
-      const data = await response.json();
-      this.listaPontoCarne = data;
-    },
-    async getOpcionais () {
-      const response = await fetch('http://localhost:3000/opcionais');
-      const responseJson = await response.json();
-      this.listaComplementos = responseJson.complemento;
-      this.listaBebidas = responseJson.bebidas;
-    },
-    async criarPedido (e) {
-      e.preventDefault();
+    export default {
+        name: "PedidoComponent",
+        data() {
+            return {
+                nomeCliente : "",
+                pontoCarneSelecionado: "",
+                listaPontoCarne : [],
+                listaComplementos : [],
+                listaBebidas: [],
+                listaComplementosSelecionados: [],
+                listaBebidasSelecionadas: []
+            }
+        },
+        props: {
+            burguer: null
+        },
+        methods: {
+            async getTipoPontos() {
+                const response = await fetch(" http://localhost:3000/tipos_pontos");
+                const data = await response.json();
+                this.listaPontoCarne = data;
+            },
+            async getOpcionais() {
+                const response = await fetch(" http://localhost:3000/opcionais");
+                const responseJson = await response.json();
+                this.listaComplementos = responseJson.complemento;
+                this.listaBebidas = responseJson.bebidas;
+            },
+            async criarPedido(e) {
+                e.preventDefault();
 
-      // 1˚ - Não deixar criar um pedido sem nome, ponto da carne.
-      // 2˚  - Criar um componente de mensagem de sucesso e erro
-      // - Deve ter imagem de sucesso e erro.
-      // Esse componente deve ser usado na tela de cadastro do pedido e na tela de lista pedido ao deletar o pedido.
-      // 4˚ - Após o pedido criado, um botão deve aparecer na tela, para navergar para a lista de pedidos.
+                // 1˚ - Não deixar criar um pedido sem nome, ponto da carne.
+                // 2˚  - Criar um componente de mensagem de sucesso e erro
+                       // - Deve ter imagem de sucesso e erro. 
+                       // Esse componente deve ser usado na tela de cadastro do pedido e na tela de lista pedido ao deletar o pedido. 
+                //4˚ - Após o pedido criado, um botão deve aparecer na tela, para navergar para a lista de pedidos.       
 
-      const dadosPedido = {
-        nome: this.nomeCliente,
-        ponto: this.pontoCarneSelecionado,
-        bebidas: Array.from(this.listaBebidasSelecionadas),
-        complementos: Array.from(this.listaComplementosSelecionados),
-        statusId: 5,
-        hamburguer: this.burguer
-      };
+                const dadosPedido = {
+                    nome : this.nomeCliente,
+                    ponto: this.pontoCarneSelecionado,
+                    bebidas: Array.from(this.listaBebidasSelecionadas),
+                    complementos: Array.from(this.listaComplementosSelecionados),
+                    statusId: 5,
+                    hamburguer: this.burguer 
+                }
 
-      const dadosPedidoJson = JSON.stringify(dadosPedido);
+                const dadosPedidoJson = JSON.stringify(dadosPedido);
 
-      const requisicao = await fetch('http://localhost:3000/pedidos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: dadosPedidoJson
-      });
+                const requisicao = await fetch("http://localhost:3000/pedidos", {
+                    method: "POST",
+                    headers: {"Content-Type" : "application/json"},
+                    body : dadosPedidoJson
+                });
+
+
+
+
+            }
+        
+
+
+        },
+        mounted() {
+           this.getTipoPontos(); 
+           this.getOpcionais();
+
+        }
     }
-
-  },
-  mounted () {
-    this.getTipoPontos();
-    this.getOpcionais();
-  }
-};
 </script>
 
 <style scoped>
@@ -176,6 +183,7 @@ select {
     height: 50px;
 }
 
+
 #opcionais-titulo {
     width: 100%;
 }
@@ -225,5 +233,11 @@ select {
     background-color: transparent;
     color: #222;
 }
+
+
+
+
+
+
 
 </style>

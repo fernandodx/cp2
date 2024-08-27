@@ -21,29 +21,31 @@
 
 <script>
 export default {
-  name: 'MenuView',
-  data () {
-    return {
-      listaMenuHamburgues: []
-    };
-  },
-  methods: {
-    async consultarMenu () {
-      const response = await fetch(' http://localhost:3000/menu');
-      const dados = await response.json();
-      this.listaMenuHamburgues = dados.burgues;
+    name : "MenuView",
+    data() {
+        return {
+            listaMenuHamburgues: []
+        };
     },
-    selecionarBurguer (burguerSelecionado) {
-      const param = JSON.stringify(burguerSelecionado);
-      const burguerJsonEncode = encodeURIComponent(param);
-      this.$router.push({ path: '/config-pedido', query: { burguer: burguerJsonEncode } });
+    methods: {
+        async consultarMenu() {
+            const response = await fetch(" http://localhost:3000/menu");
+            const dados = await response.json();
+            this.listaMenuHamburgues = dados.burgues;
+        },
+        selecionarBurguer(burguerSelecionado) {
+            const param = JSON.stringify(burguerSelecionado);
+            const burguerJsonEncode = encodeURIComponent(param);
+            this.$router.push({path: '/config-pedido', query: {burguer : burguerJsonEncode}});
+        }
+    },
+    mounted() {
+        this.consultarMenu()
     }
-  },
-  mounted () {
-    this.consultarMenu();
-  }
 
-};
+
+
+}
 
 </script>
 
@@ -145,5 +147,9 @@ export default {
     border: solid 1px rgb(6, 87, 85);
     border-radius: 5px;
 };
+
+
+
+
 
 </style>
