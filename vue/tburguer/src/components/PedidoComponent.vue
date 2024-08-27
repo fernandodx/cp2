@@ -86,42 +86,42 @@
             },
             async criarPedido(e) {
                 e.preventDefault();
+                if(this.nomeCliente.length == 0){
+                    alert('[ERRO]: Campo nome não pode estar vazio!');
+                } else if(this.pontoCarneSelecionado == 0){
+                    alert('[ERRO]: É necessário escolher o ponto da carne!')
+                } else{
+                    // 1˚ - Não deixar criar um pedido sem nome, ponto da carne.
+                    // 2˚  - Criar um componente de mensagem de sucesso e erro
+                    // - Deve ter imagem de sucesso e erro. 
+                    // Esse componente deve ser usado na tela de cadastro do pedido e na tela de lista pedido ao deletar o pedido. 
+                    //4˚ - Após o pedido criado, um botão deve aparecer na tela, para navergar para a lista de pedidos.       
 
-                // 1˚ - Não deixar criar um pedido sem nome, ponto da carne.
-                // 2˚  - Criar um componente de mensagem de sucesso e erro
-                       // - Deve ter imagem de sucesso e erro. 
-                       // Esse componente deve ser usado na tela de cadastro do pedido e na tela de lista pedido ao deletar o pedido. 
-                //4˚ - Após o pedido criado, um botão deve aparecer na tela, para navergar para a lista de pedidos.       
+                    const dadosPedido = {
+                        nome : this.nomeCliente,
+                        ponto: this.pontoCarneSelecionado,
+                        bebidas: Array.from(this.listaBebidasSelecionadas),
+                        complementos: Array.from(this.listaComplementosSelecionados),
+                        statusId: 5,
+                        hamburguer: this.burguer 
+                    }
 
-                const dadosPedido = {
-                    nome : this.nomeCliente,
-                    ponto: this.pontoCarneSelecionado,
-                    bebidas: Array.from(this.listaBebidasSelecionadas),
-                    complementos: Array.from(this.listaComplementosSelecionados),
-                    statusId: 5,
-                    hamburguer: this.burguer 
-                }
+                    const dadosPedidoJson = JSON.stringify(dadosPedido);
 
-                const dadosPedidoJson = JSON.stringify(dadosPedido);
-
-                const requisicao = await fetch("http://localhost:3000/pedidos", {
-                    method: "POST",
-                    headers: {"Content-Type" : "application/json"},
-                    body : dadosPedidoJson
-                });
-
-
-
+                    const requisicao = await fetch("http://localhost:3000/pedidos", {
+                        method: "POST",
+                        headers: {"Content-Type" : "application/json"},
+                        body : dadosPedidoJson
+                    });
+                    }
 
             }
-        
-
+    
 
         },
         mounted() {
            this.getTipoPontos(); 
            this.getOpcionais();
-
         }
     }
 </script>

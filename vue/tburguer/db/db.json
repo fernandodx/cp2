@@ -156,6 +156,43 @@
         "eh_novidade": true
       },
       "id": 5
+    },
+    {
+      "nome": "Rafael",
+      "ponto": {
+        "id": 1,
+        "descricao": "Ao ponto"
+      },
+      "bebidas": [
+        {
+          "id": 3,
+          "nome": "Coca Cola Zero Lata 310 ml",
+          "descricao": "",
+          "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696431455651d7d5fd3661_75_75.jpeg",
+          "valor": 6,
+          "eh_novidade": false
+        }
+      ],
+      "complementos": [
+        {
+          "id": 1,
+          "nome": "Combo Bebida + Batata",
+          "descricao": "Batata ondulada sequinha e crocante temperada com lemon pepper + bebida de sua escolha",
+          "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696431534651d7daeba24e_75_75.jpeg",
+          "valor": 11,
+          "eh_novidade": true
+        }
+      ],
+      "statusId": 5,
+      "hamburguer": {
+        "id": 5,
+        "nome": "Braseirão",
+        "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1701549228656b94ac481d3_75_75.jpeg",
+        "descricao": "Delicioso hambúrguer no pão de brioche selado na brasa, com manteiga de leite, maionese especial com toque de alho e ervas, dois suculentos blend's de 160 gramas e queijo mussarela derretido na brasa.",
+        "valor": 30,
+        "eh_novidade": true
+      },
+      "id": 6
     }
   ],
   "opcionais": {
