@@ -4,17 +4,17 @@
         <div>
             <div id="pedidos-tabela-cabecalho">
                 <div id="ordem-id">#ID</div>
-                <div>Nome</div>
-                <div>Hamburguer</div>
-                <div>Ponto</div>
-                <div>Opcionais</div>
-                <div>Status</div>
-                <div id="div-acoes">Ações</div>
+                <div>Nome</div>    
+                <div>Hamburguer</div>    
+                <div>Ponto</div>    
+                <div>Opcionais</div>    
+                <div>Status</div>    
+                <div id="div-acoes">Ações</div>    
             </div>
-        </div>
+        </div>  
 
         <!-- Quando não tiver nenhum pedido. Somente o componente de mensagem é para ser apresentado. A tabela deve ser escondida. -->
-
+        
         <div class="pedidos-tabela-linha"
             v-for="pedido in listaPedidosRealizado" :key="pedido.id">
             <div id="ordem-numero">{{ pedido.id }}</div>
@@ -57,54 +57,58 @@
 
 <script>
 export default {
-  name: 'ListaPedidoComponent',
-  data () {
-    return {
-      listaPedidosRealizado: [],
-      listaStatusPedido: []
-    };
-  },
-  methods: {
-
-    // ConsultarPedidos
-    async consultarPedidos () {
-      const response = await fetch('http://localhost:3000/pedidos');
-      this.listaPedidosRealizado = await response.json();
+    name: "ListaPedidoComponent",
+    data() {
+        return {
+            listaPedidosRealizado: [],
+            listaStatusPedido: []
+        }
     },
-    // Consultar Status
-    async consultarStatus () {
-      const response = await fetch('http://localhost:3000/status_pedido');
-      this.listaStatusPedido = await response.json();
+    methods: {
+
+        //ConsultarPedidos
+        async consultarPedidos() {
+            const response = await fetch("http://localhost:3000/pedidos");
+            this.listaPedidosRealizado = await response.json();
+        },
+        //Consultar Status
+        async consultarStatus() {
+            const response = await fetch("http://localhost:3000/status_pedido");
+            this.listaStatusPedido = await response.json();
+        },
+        async deletarPedido(id) {
+            
+            //3˚ - Ao deletar o pedido, deve ser exibido a mensagem do componente de sucesso. 
+                // Após isso a lista deve ser atualizada.
+
+            const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
+                method: "DELETE"
+            });
+        },
+        async atualizarStatusPedido(event, id) {
+            const idPedidoAtualizado = event.target.value;
+            console.log(idPedidoAtualizado);
+
+            const atualizacaoJson = JSON.stringify({statusId : idPedidoAtualizado});
+
+            const response = await fetch(`http://localhost:3000/pedidos/${id}`,{
+                method : "PATCH",
+                headers: {"Content-Type" : "application/json"},
+                body: atualizacaoJson
+            });
+
+
+        }
+
+
+        //Atualizar o pedido
+
     },
-    async deletarPedido (id) {
-      // 3˚ - Ao deletar o pedido, deve ser exibido a mensagem do componente de sucesso.
-      // Após isso a lista deve ser atualizada.
-
-      const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
-        method: 'DELETE'
-      });
-    },
-    async atualizarStatusPedido (event, id) {
-      const idPedidoAtualizado = event.target.value;
-      console.log(idPedidoAtualizado);
-
-      const atualizacaoJson = JSON.stringify({ statusId: idPedidoAtualizado });
-
-      const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: atualizacaoJson
-      });
+    mounted() {
+        this.consultarPedidos();
+        this.consultarStatus();
     }
-
-    // Atualizar o pedido
-
-  },
-  mounted () {
-    this.consultarPedidos();
-    this.consultarStatus();
-  }
-};
+}
 
 </script>
 
@@ -115,8 +119,8 @@ export default {
     margin: 0 auto;
 }
 
-#pedidos-tabela-cabecalho,
-#pedidos-tabela-linhas,
+#pedidos-tabela-cabecalho, 
+#pedidos-tabela-linhas, 
 .pedidos-tabela-linha {
     display: flex;
     flex-wrap: wrap;
@@ -162,5 +166,8 @@ select {
     height: 2px;
     background-color: darkgoldenrod;
 }
+
+
+
 
 </style>
