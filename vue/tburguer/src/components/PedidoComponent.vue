@@ -50,14 +50,26 @@
             </div>
             <div class="inputs">
                 <input type="submit" class="submit-btn" value="Confirmar Pedido"/>
+                <router-link v-show="botao" id="bt-pedidos" to="/pedidos"><input type="submit" class="submit-btn" value="Ir Para Pedidos"/></router-link>
             </div>
         </form>
+        <div id="sucesso">
+            <p v-show="suc"><sucesso /></p>
+            <p v-show="insuc"><insucesso /></p>
+        </div>
     </div>
 </template>
 
 <script>
+    import sucesso from './SucessoComponent'
+    import insucesso from './InsucessoComponent'
+
     export default {
         name: "PedidoComponent",
+        components:{
+            sucesso,
+            insucesso
+        },
         data() {
             return {
                 nomeCliente : "",
@@ -66,7 +78,10 @@
                 listaComplementos : [],
                 listaBebidas: [],
                 listaComplementosSelecionados: [],
-                listaBebidasSelecionadas: []
+                listaBebidasSelecionadas: [],
+                suc: false,
+                insuc: false,
+                botao: false
             }
         },
         props: {
@@ -87,16 +102,36 @@
             async criarPedido(e) {
                 e.preventDefault();
                 if(this.nomeCliente.length == 0){
-                    alert('[ERRO]: Campo nome não pode estar vazio!');
+                    this.suc = false;
+                    this.insuc = true;
+                    setTimeout(() => {
+                        this.insuc = false
+                    }, 3000);
+                    setTimeout(() => {
+                        alert('Campo nome vazio!')
+                    }, 1000);
+                    
                 } else if(this.pontoCarneSelecionado == 0){
-                    alert('[ERRO]: É necessário escolher o ponto da carne!')
+                    this.suc = false;
+                    this.insuc = true;
+                    setTimeout(() => {
+                        this.insuc = false
+                    }, 3000);
+                    setTimeout(() => {
+                        alert('É necessário escolher ponto da carne!')
+                    }, 1000);
                 } else{
-                    // 1˚ - Não deixar criar um pedido sem nome, ponto da carne.
+                    // 1˚ - Não deixar criar um pedido sem nome, ponto da carne. (ok)
                     // 2˚  - Criar um componente de mensagem de sucesso e erro
-                    // - Deve ter imagem de sucesso e erro. 
+                    // - Deve ter imagem de sucesso e erro. (ok)
                     // Esse componente deve ser usado na tela de cadastro do pedido e na tela de lista pedido ao deletar o pedido. 
                     //4˚ - Após o pedido criado, um botão deve aparecer na tela, para navergar para a lista de pedidos.       
-
+                    this.suc = true;
+                    this.insuc = false;
+                    setTimeout(() => {
+                        this.suc = false
+                    }, 3000);
+                    this.botao = true;
                     const dadosPedido = {
                         nome : this.nomeCliente,
                         ponto: this.pontoCarneSelecionado,
@@ -165,7 +200,7 @@ label {
     margin-bottom: 16px;
     color: #222;
     padding: 5px 12px;
-    border-left: 4px solid darkgoldenrod;
+    border-left: 4px solid #b8860b;
     display: flex;
 }
 
@@ -234,10 +269,16 @@ select {
     color: #222;
 }
 
+#sucesso{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    bottom: 150px;
+    right: 250px;
+}
 
-
-
-
-
+#bt-pedidos{
+    margin-top: 10px;
+}
 
 </style>

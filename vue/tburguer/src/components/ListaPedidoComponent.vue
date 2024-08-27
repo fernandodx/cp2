@@ -53,15 +53,24 @@
             </div>
         </div>
     </div>
+    <div id="sucesso" v-show="del">
+        <sucesso />
+    </div>
 </template>
 
 <script>
+ import sucesso from './SucessoComponent'
+
 export default {
     name: "ListaPedidoComponent",
+    components:{
+        sucesso
+    },
     data() {
         return {
             listaPedidosRealizado: [],
-            listaStatusPedido: []
+            listaStatusPedido: [],
+            del: false
         }
     },
     methods: {
@@ -77,14 +86,19 @@ export default {
             this.listaStatusPedido = await response.json();
         },
         async deletarPedido(id) {
-            
             //3˚ - Ao deletar o pedido, deve ser exibido a mensagem do componente de sucesso. 
                 // Após isso a lista deve ser atualizada.
 
             const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
                 method: "DELETE"
             });
+            this.del =true;
+            setTimeout(() => {
+                window.location.reload();
+                    }, 2000); 
+            
         },
+
         async atualizarStatusPedido(event, id) {
             const idPedidoAtualizado = event.target.value;
             console.log(idPedidoAtualizado);
@@ -167,7 +181,13 @@ select {
     background-color: darkgoldenrod;
 }
 
-
+#sucesso{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    bottom: 300px;
+    right: 50px;
+}
 
 
 </style>
