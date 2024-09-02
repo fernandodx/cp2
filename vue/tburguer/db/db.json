@@ -78,10 +78,10 @@
       "id": 37
     },
     {
-      "nome": "bia",
+      "nome": "lola",
       "ponto": {
-        "id": 3,
-        "descricao": "Mal passada"
+        "id": 1,
+        "descricao": "Ao ponto"
       },
       "bebidas": [
         {
@@ -105,14 +105,14 @@
       ],
       "statusId": 5,
       "hamburguer": {
-        "id": 4,
-        "nome": "Campeiro",
-        "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696432070651d7fc6b7c98_75_75.jpeg",
-        "descricao": "Delicioso pão de brioche selado na brasa com manteiga de leite, maionese especial de alho e ervas, alface americana fresca e crocante, tomate grelhado e defumado, suculento hambúrguer de 160 gramas, queijo derretido na brasa.",
-        "valor": 30,
+        "id": 3,
+        "nome": "Doritos",
+        "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696429871651d772fb9fbe_75_75.jpeg",
+        "descricao": "Delicioso pão de brioche selado na brasa com manteiga de leite, maionese especial, suculento blend de 160 gramas, queijo cheddar derretido na brasa, cream cheese e Doritos.",
+        "valor": 32,
         "eh_novidade": true
       },
-      "id": 39
+      "id": 40
     }
   ],
   "opcionais": {
