@@ -64,7 +64,7 @@ export default {
     flex: 1;
     overflow-x: auto;
     white-space: nowrap;
-    width: 700px;
+    width: 1300px;
     margin: 0 auto;
     box-shadow: inset -10px 0px 15px -20px gray;
 }

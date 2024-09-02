@@ -1,5 +1,7 @@
 <template>
     <div>
+        <MenssagemES :tipo="mensagem.tipo" :texto="mensagem.texto" v-if="mensagem.visivel" />
+
         <form id="pedido-form" @submit="criarPedido($event)">
             <div>
                 <p id="nome-hamburguer-content">
@@ -23,8 +25,8 @@
                     v-model="pontoCarneSelecionado">
                     <option value="" selected>Selecione o ponto</option>
                     <option v-for="pontoCarne in listaPontoCarne" 
-                    :key="pontoCarne.id" 
-                    :value="pontoCarne">{{ pontoCarne.descricao }}</option>
+                            :key="pontoCarne.id" 
+                            :value="pontoCarne">{{ pontoCarne.descricao }}</option>
                 </select>
             </div>
             <div id="opcionais-titulo" class="inputs">
@@ -34,7 +36,6 @@
                 <div class="checkbox-container"
                      v-for="complemento in listaComplementos"
                      :key="complemento.id">
-
                      <input type="checkbox" :name="complemento.nome"
                             v-model="listaComplementosSelecionados"
                             :value="complemento">
@@ -52,79 +53,107 @@
                 <input type="submit" class="submit-btn" value="Confirmar Pedido"/>
             </div>
         </form>
+
+        <!-- Botão para ir para a lista de pedidos-->
+        <button v-if="mostrarBotaoNavegar" @click="navegarParaListaPedidos">Ver Lista de Pedidos</button>
     </div>
 </template>
 
 <script>
-    export default {
-        name: "PedidoComponent",
-        data() {
-            return {
-                nomeCliente : "",
-                pontoCarneSelecionado: "",
-                listaPontoCarne : [],
-                listaComplementos : [],
-                listaBebidas: [],
-                listaComplementosSelecionados: [],
-                listaBebidasSelecionadas: []
+import MenssagemES from './MenssagemES.vue';
+
+export default {
+    name: "PedidoComponent",
+    components: {
+        MenssagemES
+    },
+    data() {
+        return {
+            nomeCliente: "",
+            pontoCarneSelecionado: "",
+            listaPontoCarne: [],
+            listaComplementos: [],
+            listaBebidas: [],
+            listaComplementosSelecionados: [],
+            listaBebidasSelecionadas: [],
+            mensagem: {
+                tipo: '',
+                visivel: false
+            },
+            texto: '',
+            mostrarBotaoNavegar: false
+        }
+    },
+    props: {
+        burguer: null
+    },
+    methods: {
+        async getTipoPontos() {
+            const response = await fetch("http://localhost:3000/tipos_pontos");
+            const data = await response.json();
+            this.listaPontoCarne = data;
+        },
+        async getOpcionais() {
+            const response = await fetch("http://localhost:3000/opcionais");
+            const responseJson = await response.json();
+            this.listaComplementos = responseJson.complemento;
+            this.listaBebidas = responseJson.bebidas;
+        },
+        async criarPedido(e) {
+            e.preventDefault();
+
+            if (!this.nomeCliente || !this.pontoCarneSelecionado) {
+                this.mostrarMensagem('erro', 'Preencha todos os campos obrigatórios!');
+                return;
             }
-        },
-        props: {
-            burguer: null
-        },
-        methods: {
-            async getTipoPontos() {
-                const response = await fetch(" http://localhost:3000/tipos_pontos");
-                const data = await response.json();
-                this.listaPontoCarne = data;
-            },
-            async getOpcionais() {
-                const response = await fetch(" http://localhost:3000/opcionais");
-                const responseJson = await response.json();
-                this.listaComplementos = responseJson.complemento;
-                this.listaBebidas = responseJson.bebidas;
-            },
-            async criarPedido(e) {
-                e.preventDefault();
 
-                // 1˚ - Não deixar criar um pedido sem nome, ponto da carne.
-                // 2˚  - Criar um componente de mensagem de sucesso e erro
-                       // - Deve ter imagem de sucesso e erro. 
-                       // Esse componente deve ser usado na tela de cadastro do pedido e na tela de lista pedido ao deletar o pedido. 
-                //4˚ - Após o pedido criado, um botão deve aparecer na tela, para navergar para a lista de pedidos.       
+            const dadosPedido = {
+                nome: this.nomeCliente,
+                ponto: this.pontoCarneSelecionado,
+                bebidas: Array.from(this.listaBebidasSelecionadas),
+                complementos: Array.from(this.listaComplementosSelecionados),
+                statusId: 5,
+                hamburguer: this.burguer
+            };
 
-                const dadosPedido = {
-                    nome : this.nomeCliente,
-                    ponto: this.pontoCarneSelecionado,
-                    bebidas: Array.from(this.listaBebidasSelecionadas),
-                    complementos: Array.from(this.listaComplementosSelecionados),
-                    statusId: 5,
-                    hamburguer: this.burguer 
-                }
+            const dadosPedidoJson = JSON.stringify(dadosPedido);
 
-                const dadosPedidoJson = JSON.stringify(dadosPedido);
-
+            try {
                 const requisicao = await fetch("http://localhost:3000/pedidos", {
                     method: "POST",
-                    headers: {"Content-Type" : "application/json"},
-                    body : dadosPedidoJson
+                    headers: { "Content-Type": "application/json" },
+                    body: dadosPedidoJson
                 });
-
-
-
-
+                
+                if (requisicao.ok) {
+                    this.mostrarMensagem('sucesso', 'Pedido criado com sucesso!');
+                    this.mostrarBotaoNavegar = true; // Exibe o botão pra navegar
+                } else {
+                    this.mostrarMensagem('erro', 'Erro ao criar o pedido!');
+                }
+            } catch (error) {
+                this.mostrarMensagem('erro', 'Erro ao criar o pedido!');
             }
-        
-
-
         },
-        mounted() {
-           this.getTipoPontos(); 
-           this.getOpcionais();
-
+        mostrarMensagem(tipo, texto) {
+           this.mensagem.tipo = tipo;
+           this.mensagem.texto = texto;
+           this.mensagem.visivel = true;
+           setTimeout(() => this.mensagem.visivel = false, 3000); // Oculta após 3 segundos
+       },
+        navegarParaListaPedidos() {
+            //  navegar para a lista de pedidos
+            this.$router.push({name: 'pedidos'}); 
         }
+    },
+    mounted() {
+        this.getTipoPontos();
+        this.getOpcionais();
     }
+}
 </script>
+
+
 
 <style scoped>
 
@@ -179,6 +208,19 @@ input, select {
     font-size: 12px;
 }
 
+#obname{
+    padding: 9px;
+    margin: 5px;
+    width: 130px;
+    border: #ff0000d7 solid 2px;
+    border-radius: 25px;
+    height: 18px;
+    font-size: 13px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    background-color: rgb(255, 49, 49);
+    
+}
 select {
     height: 50px;
 }
@@ -235,9 +277,13 @@ select {
 }
 
 
-
-
-
-
+button{
+    background-color: rgb(126, 196, 23);
+    border-radius: 10px;
+    border-color: rgb(126, 201, 15);
+    color: aliceblue;
+    padding: 8px;
+    margin-bottom: 5px;
+}
 
 </style>
