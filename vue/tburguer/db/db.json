@@ -66,7 +66,7 @@
           "eh_novidade": true
         }
       ],
-      "statusId": 6,
+      "statusId": "1",
       "hamburguer": {
         "id": 1,
         "nome": "Diretoria Alterado",
@@ -76,6 +76,86 @@
         "eh_novidade": true
       },
       "id": 2
+    },
+    {
+      "nome": "",
+      "ponto": "",
+      "bebidas": [],
+      "complementos": [],
+      "statusId": 5,
+      "hamburguer": {
+        "id": 1,
+        "nome": "Diretoria",
+        "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696429768651d76c8124dc_75_75.jpeg",
+        "descricao": "Delicioso pão de brioche selado na brasa com manteiga de leite, maionese especial de alho e ervas, tomate grelhado e defumado na brasa, suculento blend de 160 gramas, queijo derretido na brasa, molho suave de gorgonzola coberto de crispy de alho poró.",
+        "valor": 35,
+        "eh_novidade": true
+      },
+      "id": 3
+    },
+    {
+      "nome": "Pedido teste",
+      "ponto": {
+        "id": 2,
+        "descricao": "Bem passada"
+      },
+      "bebidas": [],
+      "complementos": [],
+      "statusId": 5,
+      "hamburguer": {
+        "id": 1,
+        "nome": "Diretoria",
+        "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696429768651d76c8124dc_75_75.jpeg",
+        "descricao": "Delicioso pão de brioche selado na brasa com manteiga de leite, maionese especial de alho e ervas, tomate grelhado e defumado na brasa, suculento blend de 160 gramas, queijo derretido na brasa, molho suave de gorgonzola coberto de crispy de alho poró.",
+        "valor": 35,
+        "eh_novidade": true
+      },
+      "id": 4
+    },
+    {
+      "nome": "Teste",
+      "ponto": {
+        "id": 2,
+        "descricao": "Bem passada"
+      },
+      "bebidas": [
+        {
+          "id": 2,
+          "nome": "Shweppes Citrus 310 ml",
+          "descricao": "",
+          "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/16966989566521924cc9418_75_75.jpeg",
+          "valor": 6,
+          "eh_novidade": false
+        },
+        {
+          "id": 1,
+          "nome": "Coca Cola Lata 310 ml",
+          "descricao": "",
+          "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696431408651d7d30645b9_75_75.jpeg",
+          "valor": 6,
+          "eh_novidade": false
+        }
+      ],
+      "complementos": [
+        {
+          "id": 1,
+          "nome": "Combo Bebida + Batata",
+          "descricao": "Batata ondulada sequinha e crocante temperada com lemon pepper + bebida de sua escolha",
+          "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696431534651d7daeba24e_75_75.jpeg",
+          "valor": 11,
+          "eh_novidade": true
+        }
+      ],
+      "statusId": 5,
+      "hamburguer": {
+        "id": 2,
+        "nome": "Veggie",
+        "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696429812651d76f4d8671_75_75.jpeg",
+        "descricao": "Delicioso pão de brioche selado na brasa com manteiga de leite, maionese secreta, tomate assado e defumado na lenha frutífera, blend de arroz negro, batata baroa e Shimeji 150 gramas grelhado e regado ao azeite , queijo derretido na brasa e molho secreto de cebola caramelizada, tudo preparado com aquele sabor de churrasco.",
+        "valor": 35,
+        "eh_novidade": true
+      },
+      "id": 5
     }
   ],
   "opcionais": {
@@ -146,7 +226,7 @@
     "burgues": [
       {
         "id": 1,
-        "nome": "Diretoria Alterado",
+        "nome": "Diretoria",
         "foto": "https://instadelivery-public.nyc3.cdn.digitaloceanspaces.com/itens/1696429768651d76c8124dc_75_75.jpeg",
         "descricao": "Delicioso pão de brioche selado na brasa com manteiga de leite, maionese especial de alho e ervas, tomate grelhado e defumado na brasa, suculento blend de 160 gramas, queijo derretido na brasa, molho suave de gorgonzola coberto de crispy de alho poró.",
         "valor": 35,
