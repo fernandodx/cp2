@@ -13,19 +13,24 @@
                        id="nome-cliente"
                        name="nome-cliente"
                        v-model="nomeCliente"
-                       placeholder="Digite seu Nome"/>
+                       placeholder="Digite seu Nome"
+                       :class="{ 'is-invalid': errors.nomeCliente }"/>
+                <span v-if="errors.nomeCliente" class="error-message">{{ errors.nomeCliente }}</span>
+                
             </div>
             <div class="inputs">
                 <label for="ponto-carne">Ponto da carne</label>
                 <select
                     id="ponto-carne"
                     name="ponto-carne"
-                    v-model="pontoCarneSelecionado">
+                    v-model="pontoCarneSelecionado"
+                    :class="{ 'is-invalid': errors.pontoCarne }">
                     <option value="" selected>Selecione o ponto</option>
                     <option v-for="pontoCarne in listaPontoCarne" 
                     :key="pontoCarne.id" 
                     :value="pontoCarne">{{ pontoCarne.descricao }}</option>
                 </select>
+                <span v-if="errors.pontoCarne" class="error-message">{{ errors.pontoCarne }}</span>
             </div>
             <div id="opcionais-titulo" class="inputs">
                 <label id="opcionais-titulo" for="Opcionais"> Selecione os opcionais</label>
@@ -51,12 +56,20 @@
             <div class="inputs">
                 <input type="submit" class="submit-btn" value="Confirmar Pedido"/>
             </div>
-        </form>
+        </form> 
+        <mensagem-component :message="message"/>   
+        
+        <button v-if="message && message.type === 'success'" @click="navegarParaListaPedidos" class="navigate-btn">
+            Ir para a lista de pedidos
+        </button>
     </div>
 </template>
 
 <script>
+import MensagemComponent from './MensagemComponent.vue';
+
     export default {
+  components: { MensagemComponent },
         name: "PedidoComponent",
         data() {
             return {
@@ -66,7 +79,9 @@
                 listaComplementos : [],
                 listaBebidas: [],
                 listaComplementosSelecionados: [],
-                listaBebidasSelecionadas: []
+                listaBebidasSelecionadas: [],
+                errors: {},
+                message: null
             }
         },
         props: {
@@ -84,14 +99,24 @@
                 this.listaComplementos = responseJson.complemento;
                 this.listaBebidas = responseJson.bebidas;
             },
+
             async criarPedido(e) {
                 e.preventDefault();
+   
+                this.errors = {};
+                this.message = null;
 
-                // 1˚ - Não deixar criar um pedido sem nome, ponto da carne.
-                // 2˚  - Criar um componente de mensagem de sucesso e erro
-                       // - Deve ter imagem de sucesso e erro. 
-                       // Esse componente deve ser usado na tela de cadastro do pedido e na tela de lista pedido ao deletar o pedido. 
-                //4˚ - Após o pedido criado, um botão deve aparecer na tela, para navergar para a lista de pedidos.       
+                if (!this.nomeCliente.trim()) {
+                this.errors.nomeCliente = 'O campo nome é obrigatório.';
+                }
+
+                if (!this.pontoCarneSelecionado) {
+                this.errors.pontoCarne = 'O ponto da carne é obrigatório.';
+                }
+
+                if (Object.keys(this.errors).length > 0) {
+                    return;
+                }
 
                 const dadosPedido = {
                     nome : this.nomeCliente,
@@ -103,21 +128,43 @@
                 }
 
                 const dadosPedidoJson = JSON.stringify(dadosPedido);
-
-                const requisicao = await fetch("http://localhost:3000/pedidos", {
-                    method: "POST",
-                    headers: {"Content-Type" : "application/json"},
-                    body : dadosPedidoJson
-                });
-
-
-
-
+                
+                try {
+                    const requisicao = await fetch("http://localhost:3000/pedidos", {
+                        method: "POST",
+                        headers: {"Content-Type" : "application/json"},
+                        body : dadosPedidoJson
+                    });  
+                    
+                    if (requisicao.ok) {
+                    this.message = { 
+                        type: 'success', 
+                        text: 'Pedido criado com sucesso!',
+                        image: '/img/sucess.png'
+                     };
+                    } 
+                    else {
+                    this.message = { 
+                        type: 'error', 
+                        text: 'Erro ao criar o pedido. Tente novamente.',
+                        image: '/img/error.png'
+                     };
+                    }
+                    } 
+                    catch (error) {
+                    console.error('Erro:', error);
+                    this.message = { 
+                        type: 'error', 
+                        text: 'Erro ao criar o pedido. Tente novamente.',
+                        image: '/img/error.png'
+                     };
+                    }                        
+            },
+            navegarParaListaPedidos() {
+                this.$router.push({path: '/pedidos'})          
             }
-        
-
-
         },
+        
         mounted() {
            this.getTipoPontos(); 
            this.getOpcionais();
@@ -233,11 +280,6 @@ select {
     background-color: transparent;
     color: #222;
 }
-
-
-
-
-
 
 
 </style>

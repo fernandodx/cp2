@@ -1,7 +1,14 @@
 <template>
     <div id="pedidos-tabela">
-        <!-- Adicione o componente de mensagem para exibir alertas de erro e sucesso - Vou conseguir -->
-        <div>
+        <!-- Adicione o componente de mensagem para exibir alertas de erro e sucesso -->
+        <mensagem-component :message="message"/>
+
+        <div v-if="listaPedidosRealizado.length === 0">
+        <!-- Mensagem para quando não houver pedidos -->
+        <p>Nenhum pedido encontrado.</p>
+        </div>
+
+        <div v-else>
             <div id="pedidos-tabela-cabecalho">
                 <div id="ordem-id">#ID</div>
                 <div>Nome</div>    
@@ -56,12 +63,18 @@
 </template>
 
 <script>
+import MensagemComponent from './MensagemComponent.vue';
+
 export default {
     name: "ListaPedidoComponent",
+    components: {
+        MensagemComponent
+    },
     data() {
         return {
             listaPedidosRealizado: [],
-            listaStatusPedido: []
+            listaStatusPedido: [],
+            message: null
         }
     },
     methods: {
@@ -80,11 +93,39 @@ export default {
             
             //3˚ - Ao deletar o pedido, deve ser exibido a mensagem do componente de sucesso. 
                 // Após isso a lista deve ser atualizada.
-
+        try {
             const response = await fetch(`http://localhost:3000/pedidos/${id}`, {
                 method: "DELETE"
             });
+
+            if (response.ok) {
+          // Exibir mensagem de sucesso
+            this.message = { 
+            type: 'success', 
+            text: 'Pedido excluído com sucesso!',
+            image: '/img/sucess.png'
+            }; 
+          // Atualizar a lista de pedidos
+            await this.consultarPedidos();
+            } 
+            else {
+            this.message = { 
+            type: 'error', 
+            text: 'Erro ao excluir o pedido. Tente novamente.',
+            image: '/img/error.png'
+            };
+            }
+            } 
+            catch (error) {
+            console.error('Erro:', error);
+            this.message = { 
+            type: 'error', 
+            text: 'Erro ao excluir o pedido. Tente novamente.',
+            image: '/img/error.png'
+            };
+            }
         },
+        
         async atualizarStatusPedido(event, id) {
             const idPedidoAtualizado = event.target.value;
             console.log(idPedidoAtualizado);
