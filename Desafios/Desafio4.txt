@@ -1,0 +1,19 @@
+function maiorProdutoAdjacente(array) {
+    if (array.length < 2) {
+        throw new Error("O array deve ter no mínimo menos dois elementos.");
+    }
+    
+    let maxProduto = array[0] * array[1];
+
+    for (let i = 1; i < array.length - 1; i++) {
+        const produto = array[i] * array[i + 1];
+        if (produto > maxProduto) {
+            maxProduto = produto;
+        }
+    }
+
+    return maxProduto;
+}
+//Resultado/Exemplo de Uso
+const inputArray = [3, 6, -2, -5, 7, 3];
+console.log(maiorProdutoAdjacente(inputArray));

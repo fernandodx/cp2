@@ -1,0 +1,12 @@
+function soma(num1, num2) {
+    return num1 + num2;
+}
+
+const resultado1 = soma(3, 5);
+console.log(resultado1);
+
+const resultado2 = soma(-5, 3);
+console.log(resultado2);
+
+const resultado3 = soma(-25, -8);
+console.log(resultado3); 

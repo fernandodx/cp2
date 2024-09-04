@@ -1,0 +1,14 @@
+function stringsLongas(array) {
+ 
+    if (array.length === 0) {
+        return [];
+    }
+    
+    const comprimentoMaximo = Math.max(...array.map(str => str.length));
+    return array.filter(str => str.length === comprimentoMaximo);
+}
+
+//Resultado/Exemplo de Uso
+const inputArray = ["aba", "aa", "ad", "vcd", "aba", "cdfe", "dfkgr"];
+const resultado = stringsLongas(inputArray);
+console.log(resultado);
