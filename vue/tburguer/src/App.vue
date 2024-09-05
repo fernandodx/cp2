@@ -1,53 +1,53 @@
 <template>
   <div>
-    <navbar-component :urlLogo="urlTburguer" :descImg="descTburguer"/>
+    <NavBarComponent :descImg="descricao" :urlLogo="urlFoto"/>
     <banner-component/>
     <router-view/>
-    <footer-component/>
+    <footer-component/> 
   </div>
 </template>
 
 <script>
-import BannerComponent from './components/BannerComponent.vue'
-import FooterComponent from './components/FooterComponent.vue'
-import NavbarComponent from './components/NavbarComponent.vue'
-  
-export default {
-    name : "App",
+import BannerComponent from './components/BannerComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
+import NavBarComponent from './components/NavBarComponent.vue';
+
+
+  export default {
+    name: "App",
     data() {
       return {
-        urlTburguer : "/img/logo_tburguer.png",
-        descTburguer : "Logo Tburguer"
+        descricao : "Logo TBurguer",
+        urlFoto : "/img/logo_tburguer.png"
       }
     },
     components: {
-        BannerComponent,
-        FooterComponent,
-        NavbarComponent
+      NavBarComponent,
+      FooterComponent,
+      BannerComponent,
     }
-  }
 
+  }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri';
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1 {
   text-align: center;
-  color: #2c3e50;
+  font-size: 35px;
+  margin-bottom: 30px;
+  margin-top: 16px;
+
+  color: #333;
 }
 
-nav {
-  padding: 30px;
-}
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
 
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
