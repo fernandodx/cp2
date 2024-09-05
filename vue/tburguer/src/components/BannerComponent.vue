@@ -1,6 +1,6 @@
 <template>
     <div id="main-banner">
-        <h1>Hamburguer de churrasqueiro</h1>
+        <h1>Hamburguer de Churrasqueiro</h1>
     </div>
 </template>
 
@@ -28,7 +28,8 @@
     font-size: 40px;
     color: antiquewhite;
     text-align: center;
-    background: #222;
+    background: #222222;
+    opacity: 0.90;
     padding: 25px;
     border-radius: 100px 0px 0px 100px;
   }
