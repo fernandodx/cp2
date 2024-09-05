@@ -5,8 +5,8 @@
                 <img :src="urlLogo" :alt="descImg" id="logo"/>
             </router-link>
             <router-link to="/menu">Menu</router-link>
-            <router-link to="/config-pedido">Config</router-link>
             <router-link to="/pedidos">Pedidos</router-link>
+            <router-link to="/sobre">Sobre</router-link>
         </nav>
     </div>    
 </template>

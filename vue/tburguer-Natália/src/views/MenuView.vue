@@ -7,10 +7,10 @@
                     <div class="foto-hamburguer">
                         <img :src="burguer.foto" :alt="burguer.nome"/>
                         <div class="card-coluna">
-                            <p id="nome-content">{{burguer.nome}}</p>
-                            <p id="preco-content">R$ {{burguer.valor}},00</p>
+                            <p id="nome-content">{{ burguer.nome }}</p>
+                            <p id="preco-content">R$ {{ burguer.valor }},00</p>
                             <p id="descricao-content">{{ burguer.descricao }}</p>
-                            <button>Selecionar</button>
+                            <button @click="selecionarBurguer(burguer)">Selecionar</button>
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-    name : "MenuView",
+    name: "MenuView",
     data() {
         return {
             listaMenuHamburgues: []
@@ -29,24 +29,27 @@ export default {
     },
     methods: {
         async consultarMenu() {
-            const response = await fetch("https://tburguer.wiremockapi.cloud/menu");
-            const dados = await response.json();
-            this.listaMenuHamburgues = dados.burgues;
+            try {
+                const response = await fetch("http://localhost:3000/menu");
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const dados = await response.json();
+                this.listaMenuHamburgues = dados.burgues || [];
+            } catch (error) {
+                console.error('Error fetching menu:', error);
+            }
+        },
+        selecionarBurguer(burguerSelecionado) {
+            const param = JSON.stringify(burguerSelecionado);
+            const burguerJsonEncode = encodeURIComponent(param);
+            this.$router.push({ path: '/config-pedido', query: { burguer: burguerJsonEncode } });
         }
-        /* Para Casa
-          - Criar um metodo para navegar para o Pedido componente
-          - Nesse método vai precisar passar o burger selecionar para a o componente PedidoComponent
-          - 
-        */
     },
     mounted() {
-        this.consultarMenu()
+        this.consultarMenu();
     }
-
-
-
 }
-
 </script>
 
 <style scoped>
