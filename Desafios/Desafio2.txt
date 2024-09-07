@@ -1,0 +1,10 @@
+function obterSeculo(ano) {
+    if (ano <= 0) {
+        throw new Error("Ano inválido. Deve ser um número positivo.");
+    }
+    return Math.ceil(ano / 100);
+}
+
+console.log(obterSeculo(1905))
+console.log(obterSeculo(1870))
+console.log(obterSeculo(1946))

@@ -1,0 +1,14 @@
+function verificaPalindromo(str) {
+ 
+    const normalizedStr = str
+        .replace(/[^a-zA-Z0-9]/g, '')  
+        .toLowerCase();               
+
+    const reversedStr = normalizedStr.split('').reverse().join('');
+    
+    return normalizedStr === reversedStr;
+}
+
+// Exemplos de uso
+console.log(verificaPalindromo("civic"));
+console.log(verificaPalindromo("Hello, World!")); 
