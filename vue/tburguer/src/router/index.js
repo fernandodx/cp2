@@ -1,40 +1,41 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import MenuView from '../views/MenuView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
+import AboutView from "../views/AboutView.vue";
+import MenuView from "../views/MenuView.vue";
+import ListaPedidoComponent from "@/components/ListaPedidoComponent.vue";
+import ConfiguracaoPedidoView from "@/views/ConfiguracaoPedidoView.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'paginaInicio',
-    component: MenuView
+    path: "/",
+    name: "home",
+    component: HomeView,
   },
   {
-    path: '/pedidos',
-    name: 'pedidos',
-    component: () => import('../views/PedidosView.vue')
+    path: "/menu",
+    name: "menu",
+    component: MenuView,
   },
   {
-    path: '/config-pedido',
-    name: 'config-pedido',
-    component: () => import('../views/ConfiguracaoPedidoView.vue')
+    path: "/sobre",
+    name: "sobre",
+    component: AboutView,
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('../views/AboutView.vue')
+    path: "/config-pedido",
+    name: "config-pedido",
+    component: ConfiguracaoPedidoView,
   },
   {
-    path: '/menu',
-    name: 'menu',
-    component: MenuView
-  }
-]
+    path: "/pedidos",
+    name: "pedidos",
+    component: ListaPedidoComponent,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
